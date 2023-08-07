@@ -1,37 +1,66 @@
 import 'package:flutter/material.dart';
-import 'package:oneloc_case_study/riverpod/riverpod_management.dart';
+import '../models/login_model.dart';
+import '../services/service.dart';
 import '../widgets.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-class LogIn extends ConsumerStatefulWidget {
+class LogIn extends StatefulWidget {
   const LogIn({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _LogInState();
+  State<StatefulWidget> createState() => _LogInState();
 }
-//final loginRiverpod = StateProvider((_)=> LoginRiverpod());
 
-class _LogInState extends ConsumerState<LogIn> {
+class _LogInState extends State<LogIn> {
+  final service= Service();
 
+  TextEditingController loginemailcontroller = TextEditingController();
+  TextEditingController loginpasswordcontroller = TextEditingController();
 
-  @override
+  void _loginUser() async {
+    try {
+      String email = loginemailcontroller.text;
+      String password = loginpasswordcontroller.text;
+
+      UserModelLogin? user = await service.loginCall(email: email, password: password);
+
+      if (user != null) {
+        Navigator.pushReplacementNamed(context, '/home');
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Kullanıcı bulunamadı veya şifre hatalı.'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }catch (e) {
+      print('Hata oluştu: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Bir sorun oluştu tekrar deneyin.'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
+@override
   Widget build(BuildContext context) {
+    //final text = MediaQuery.of(context).platformBrightness == Brightness.dark ?'DarkTheme' : 'LightTheme';
     return Scaffold(
       backgroundColor: const Color(0xffEDEDED),
       appBar: AppBar(
         leading: IconButton(icon:const Icon(Icons.arrow_back_ios,color: Color(0xff0076FF),), onPressed:() => Navigator.of(context).pop(),) ,
-        title: const Text('Yeni hesap oluştur', style: TextStyle(color: Colors.black,fontSize: 18,fontWeight: FontWeight.bold),) ,
+        title: const Text('Giriş yap', style: TextStyle(color: Colors.black,fontSize: 18,fontWeight: FontWeight.bold),) ,
+        centerTitle: true,
         backgroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
-        //physics: AlwaysScrollableScrollPhysics(),
         padding: const EdgeInsets.symmetric(
             horizontal: 25,
-            vertical: 100
         ),
         child: Column(
           children: [
-            SizedBox(height: 25,),
+            SizedBox(height: 70),
             RichText(
               text: const TextSpan(
                 text: 'En iyi deneyimlerin merkezi Omeloc\'a',
@@ -41,51 +70,25 @@ class _LogInState extends ConsumerState<LogIn> {
                 ],
               ),
             ),
-            const SizedBox(height: 25),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.grey.shade400,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child:TextField(
-                controller: ref.read(loginRiverpod).email,
-                style: TextStyle(color: Colors.black),
-                decoration: InputDecoration(
-                    labelText: 'E-posta adresi',
-                    border: InputBorder.none),
-              ),
-            ),
-
-            const SizedBox(height: 25),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.grey.shade400,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: TextField(
-                controller: ref.read(loginRiverpod).password,
-                style: TextStyle(color: Colors.black),
-                decoration: InputDecoration(
-                    labelText: 'Şifre',
-                    border: InputBorder.none),
-              ),
-            ),
-            const SizedBox(height: 30),
-            Container(
-              height: 60,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Color(0xff0076FF)
-              ),
-              child: Center(
-                child: TextButton(onPressed: () =>ref.read(loginRiverpod).fetch() ,child: Text("Giriş yap",style: TextStyle(color: Colors.white,fontSize:21,decoration: TextDecoration.none ),),),
-              ),
-            ),
+            SizedBox(height: 70),
+            ContainerWidget( controller: loginemailcontroller,labelText:'E-posta adresi',),
+            const SizedBox(height: 10),
+            ContainerWidget( controller: loginpasswordcontroller,labelText:'Şifre',),
+            const SizedBox(height: 20),
+            const Row(mainAxisAlignment: MainAxisAlignment.end,
+              children: [Text(
+                'Şifremi unuttum',
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+              ), Icon(Icons.arrow_forward_ios_rounded, size: 15,)
+              ],),
+            const SizedBox(height: 20),
+            TextButtonContainerWidget( text: 'Giriş yap', onPressed:_loginUser ,),
             SizedBox(height: 15,),
             Center(child: TextButton(onPressed: () {
               Navigator.pushNamed(context,'/register');
             },
               child: Text("Yeni hesap oluştur", style: TextStyle(color: Colors.black,fontSize: 16),),),),
+
             FooterWidget(textColor: Colors.black)
           ],
         ),
