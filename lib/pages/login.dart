@@ -34,7 +34,7 @@ class _LogInState extends State<LogIn> {
             RichText(
               text: const TextSpan(
                 text: 'En iyi deneyimlerin merkezi Omeloc\'a',
-                style: TextStyle(fontSize: 26,color: Colors.black),
+                style: TextStyle(fontSize: 26),
                 children: <TextSpan>[
                   TextSpan(text: ' hoş geldin!', style: TextStyle(fontWeight: FontWeight.bold)),
                 ],
@@ -57,7 +57,7 @@ class _LogInState extends State<LogIn> {
             Center(child: TextButton(onPressed: () {
               Navigator.pushNamed(context,'/register');
             },
-              child: Text("Yeni hesap oluştur", style: TextStyle(color: Colors.black,fontSize: 18,fontWeight: FontWeight.bold),),),),
+              child: Text("Yeni hesap oluştur", style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),),),
              SizedBox(height: 150,),
             FooterWidget(textColor: Colors.black)
           ],

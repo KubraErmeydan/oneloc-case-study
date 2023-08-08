@@ -18,26 +18,6 @@ class _RegisterState extends State<Register> {
   TextEditingController passwordcontroller = TextEditingController();
 
 
-  void _registerUser() async {
-    try {
-      await registerservice.registerCall(
-        username: usernamecontroller.text,
-        email: emailcontroller.text,
-        phoneNumber: phoneNumbercontroller.text,
-        password: passwordcontroller.text,
-      );
-      Navigator.pushReplacementNamed(context, '/login');
-    } catch (e) {
-      print('Hata oluştu: $e');
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Bir sorun oluştu tekrar deneyin.'),
-          backgroundColor: Colors.red,
-        ),
-      );
-    }
-  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -130,4 +110,26 @@ class _RegisterState extends State<Register> {
       ),
     );
   }
+
+
+  void _registerUser() async {
+    try {
+      await registerservice.registerCall(
+        username: usernamecontroller.text,
+        email: emailcontroller.text,
+        phoneNumber: phoneNumbercontroller.text,
+        password: passwordcontroller.text,
+      );
+      Navigator.pushReplacementNamed(context, '/login');
+    } catch (e) {
+      print('Hata oluştu: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Bir sorun oluştu tekrar deneyin.'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
 }
