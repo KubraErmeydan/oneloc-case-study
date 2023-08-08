@@ -32,12 +32,26 @@ class MyApp extends StatelessWidget {
           themeMode: ThemeMode.system,
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
-          theme: Themes.lightTheme,
-          // ThemeData(
-          //   brightness: Brightness.light,
-          //   useMaterial3: true,
-          //   textTheme: GoogleFonts.robotoTextTheme(),
-          // ),
+          theme:
+          ThemeData(
+            brightness: Brightness.light,
+            useMaterial3: true,
+              //fontFamily: GoogleFonts.robotoTextTheme(),
+
+              scaffoldBackgroundColor: Colors.grey.shade500,//
+              colorScheme: ColorScheme.light(),
+              backgroundColor: Colors.white , //app
+              primaryColor: Colors.grey.shade400,
+              appBarTheme: AppBarTheme(
+                elevation: 0.0,
+                iconTheme: IconThemeData(color: Colors.blue),
+                titleTextStyle: TextStyle(
+                  color: Colors.black,
+                ),),
+              textTheme: TextTheme( bodyText1:TextStyle(color: Colors.white),),
+              primaryTextTheme: TextTheme(bodyText1:TextStyle(color: Colors.black ),
+              )
+          ),
           initialRoute: '/',
           routes: {
             '/': (context) => SplashScreen(),

@@ -59,13 +59,17 @@ class ContainerWidget extends StatelessWidget {
       decoration: BoxDecoration(
        // color: Color(0xffCECECE),
         borderRadius: BorderRadius.circular(10),
+        color: Theme.of(context).primaryColor
       ),
-      child:TextField(
-        controller: controller,
-        style: TextStyle(color: Color(0xff525252)),
-        decoration: InputDecoration(
-            labelText: labelText,
-            border: InputBorder.none),
+      child:Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: TextField(
+          controller: controller,
+          style: TextStyle(color: Color(0xff525252)),
+          decoration: InputDecoration(
+              labelText: labelText,
+              border: InputBorder.none),
+        ),
       ),
     );
   }
