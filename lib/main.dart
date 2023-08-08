@@ -24,19 +24,20 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+
   @override
   Widget build(BuildContext context) {
         return MaterialApp(
-          darkTheme: ThemeData(brightness: Brightness.dark),
+          darkTheme: Themes.darkTheme,
           themeMode: ThemeMode.system,
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
-          theme: ThemeData(
-            brightness: Brightness.light,
-            useMaterial3: true,
-            textTheme: GoogleFonts.robotoTextTheme(),
-          ),
-
+          theme: Themes.lightTheme,
+          // ThemeData(
+          //   brightness: Brightness.light,
+          //   useMaterial3: true,
+          //   textTheme: GoogleFonts.robotoTextTheme(),
+          // ),
           initialRoute: '/',
           routes: {
             '/': (context) => SplashScreen(),

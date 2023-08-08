@@ -19,7 +19,7 @@ class FooterWidget extends StatelessWidget {
       child: RichText(
         text: TextSpan(
           text: 'Oneloc’un mobil uygulamasına giriş yapan kullanıcılar ',
-          style: TextStyle(fontSize: 12,color: textColor),
+          style: TextStyle(fontSize: 12,),
           children: <TextSpan>[
             TextSpan(
                 style: TextStyle(fontWeight: FontWeight.bold),
@@ -55,8 +55,9 @@ class ContainerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 60,
       decoration: BoxDecoration(
-        color: Color(0xffCECECE),
+       // color: Color(0xffCECECE),
         borderRadius: BorderRadius.circular(10),
       ),
       child:TextField(
@@ -69,7 +70,6 @@ class ContainerWidget extends StatelessWidget {
     );
   }
 }
-
 
 class TextButtonContainerWidget extends StatelessWidget {
   const TextButtonContainerWidget({
@@ -97,29 +97,3 @@ class TextButtonContainerWidget extends StatelessWidget {
 }
 
 
-class HesapOlustur extends StatelessWidget {
-  const HesapOlustur({
-    super.key,
-    required this.labelText,
-
-  });
-
-  final String labelText;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color:  Color(0xffCECECE),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: TextField(
-        // controller: _urlLinkController,
-        style: TextStyle(color: Colors.black),
-        decoration: InputDecoration(
-            labelText: labelText,
-            border: InputBorder.none),
-      ),
-    );
-  }
-}

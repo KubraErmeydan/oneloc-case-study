@@ -15,48 +15,18 @@ class _LogInState extends State<LogIn> {
   TextEditingController loginemailcontroller = TextEditingController();
   TextEditingController loginpasswordcontroller = TextEditingController();
 
-  void _loginUser() async {
-    try {
-      String email = loginemailcontroller.text;
-      String password = loginpasswordcontroller.text;
-
-      UserModelLogin? user = await service.loginCall(email: email, password: password);
-
-      if (user != null) {
-        Navigator.pushReplacementNamed(context, '/home');
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Kullanıcı bulunamadı veya şifre hatalı.'),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
-    }catch (e) {
-      print('Hata oluştu: $e');
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Bir sorun oluştu tekrar deneyin.'),
-          backgroundColor: Colors.red,
-        ),
-      );
-    }
-  }
-
-@override
+  @override
   Widget build(BuildContext context) {
     //final text = MediaQuery.of(context).platformBrightness == Brightness.dark ?'DarkTheme' : 'LightTheme';
     return Scaffold(
-      backgroundColor: const Color(0xffEDEDED),
       appBar: AppBar(
-        leading: IconButton(icon:const Icon(Icons.arrow_back_ios,color: Color(0xff0076FF),), onPressed:() => Navigator.of(context).pop(),) ,
-        title: const Text('Giriş yap', style: TextStyle(color: Colors.black,fontSize: 18,fontWeight: FontWeight.bold),) ,
+        leading: IconButton(icon:const Icon(Icons.arrow_back_ios,), onPressed:() => Navigator.of(context).pop(),) ,
+        title: const Text('Giriş yap', style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),) ,
         centerTitle: true,
-        backgroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(
-            horizontal: 25,
+          horizontal: 25,
         ),
         child: Column(
           children: [
@@ -87,12 +57,40 @@ class _LogInState extends State<LogIn> {
             Center(child: TextButton(onPressed: () {
               Navigator.pushNamed(context,'/register');
             },
-              child: Text("Yeni hesap oluştur", style: TextStyle(color: Colors.black,fontSize: 16),),),),
-
+              child: Text("Yeni hesap oluştur", style: TextStyle(color: Colors.black,fontSize: 18,fontWeight: FontWeight.bold),),),),
+             SizedBox(height: 150,),
             FooterWidget(textColor: Colors.black)
           ],
         ),
       ),
     );
   }
+  void _loginUser() async {
+    try {
+      String email = loginemailcontroller.text;
+      String password = loginpasswordcontroller.text;
+
+      UserModelLogin? user = await service.loginCall(email: email, password: password);
+
+      if (user != null) {
+        Navigator.pushReplacementNamed(context, '/home');
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Kullanıcı bulunamadı veya şifre hatalı.'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }catch (e) {
+      print('Hata oluştu: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Bir sorun oluştu tekrar deneyin.'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
 }

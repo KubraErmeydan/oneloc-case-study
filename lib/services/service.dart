@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import '../models/login_model.dart';
 import '../models/register_model.dart';
+
 class Service{
   final String baseUrl ="https://case.onelocapp.com/";
   final dio =Dio();
@@ -21,9 +22,6 @@ class Service{
   }
  }
 }
-
-
-
 
 
 
@@ -49,16 +47,4 @@ class RegisterService{
   }
 
 
-
-  // Future<UserModelRegister?> deleteUser(int userId) async {
-  //   final String baseUrl ="https://case.onelocapp.com/";
-  //   var response = await dio.delete(baseUrl + "api/users/{Id}");
-  //
-  //     if (response.statusCode == 200) {
-  //       log("Kullanıcı başarıyla silindi.");
-  //     } else {
-  //       throw Exception ("Request failed. ${response.statusCode}");
-  //     }
-  // }
-  //
 }
