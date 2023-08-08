@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
             useMaterial3: true,
               //fontFamily: GoogleFonts.robotoTextTheme(),
 
-              scaffoldBackgroundColor: Colors.grey.shade500,//
+              scaffoldBackgroundColor: Color(0xffCECECE),//
               colorScheme: ColorScheme.light(),
               backgroundColor: Colors.white , //app
               primaryColor: Colors.grey.shade400,

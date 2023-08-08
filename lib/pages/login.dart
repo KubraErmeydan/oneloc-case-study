@@ -19,6 +19,7 @@ class _LogInState extends State<LogIn> {
   Widget build(BuildContext context) {
     //final text = MediaQuery.of(context).platformBrightness == Brightness.dark ?'DarkTheme' : 'LightTheme';
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         leading: IconButton(icon:const Icon(Icons.arrow_back_ios,), onPressed:() => Navigator.of(context).pop(),) ,
         title: const Text('Giriş yap', style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),) ,
@@ -34,7 +35,7 @@ class _LogInState extends State<LogIn> {
             RichText(
               text: const TextSpan(
                 text: 'En iyi deneyimlerin merkezi Omeloc\'a',
-                style: TextStyle(fontSize: 26),
+                style: TextStyle(fontSize: 26, ),
                 children: <TextSpan>[
                   TextSpan(text: ' hoş geldin!', style: TextStyle(fontWeight: FontWeight.bold)),
                 ],

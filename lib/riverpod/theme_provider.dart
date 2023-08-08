@@ -49,8 +49,7 @@ class Themes{
         color: Colors.black,
       ),),
     textTheme: TextTheme( bodyText1:TextStyle(color: Colors.white),),
-    primaryTextTheme: TextTheme(bodyText1:TextStyle(color: Colors.black),
-    )
+    primaryTextTheme: TextTheme(bodyText1:TextStyle(color: Colors.black) )
 
   );
 }
